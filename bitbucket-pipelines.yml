@@ -1,0 +1,15 @@
+image: loadimpact/k6:latest
+options:
+  max-time: 30
+
+pipelines:
+  default:
+  - step:
+      name: Run performance tests
+      script:
+        - k6 run -e HOST=test ./tests/single-request.js # runs k6 test directly with hard-coded environment
+        # - k6 run -e HOST=$HOST ./tests/single-request.js # runs k6 test directly with $HOST specified in Bitbucket's repository variables
+        # - /bin/sh ./scripts/run-test.sh # runs k6 test via bash scripts - more flexibility
+# definitions:
+#   caches:
+#     npm: $HOME/.npm <- This might be used for test-report/junit later
